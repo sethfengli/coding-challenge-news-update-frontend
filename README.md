@@ -34,6 +34,12 @@ To disable the CORS in latest Chrome, you have to start a separate Chrome browse
 
 > MacOS - Terminal `open -n -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --args --user-data-dir="/tmp/chrome_dev_test" --disable-web-security`
 
+## Demo
+
+> The page will automatically poll the news RSS feeds every three minutes, you can manually click the Poll button on the top-left screen.
+
+![Sample](Sample.jpg)
+
 ## Build
 
 > Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
