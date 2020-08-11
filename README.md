@@ -1,16 +1,18 @@
 # Coding Challenge News Update Frontend
 
-This project was instructed by [News update detection (frontend)](https://bitbucket.org/isentia/coding-challenge-news-update-frontend/src/master/).
+Coding challenge instuctions locate at [News update detection (frontend)](https://bitbucket.org/isentia/coding-challenge-news-update-frontend/src/master/).
 
 ## How to run app
 
-This project was generated with [Angular CLI](https://www.npmjs.com/package/@angular/cli/v/9.0.4) version 9.0.4
+This project was generated with [Angular CLI](https://www.npmjs.com/package/@angular/cli/v/9.0.4) version 9.0.4.
 
-> Run `npm install` to install project dependencies
+Only tested in Windows 10 environment, but the other operating system should work as well, please contact me via sethfengli#yahoo.com.au if you have any questions.
+
 
 ## Clone Project Repository
 
-> `git clone https://github.com/kprokkie/angular-ngrx-news-app.git`
+> `git clone https://github.com/sethfengli/coding-challenge-news-update-frontend`
+
 
 ## Install Dependencies
 
@@ -26,9 +28,11 @@ You could get CORS errors from Chrome when you try to test or add RSS feeds on d
 
 To disable the CORS in latest Chrome, you have to start a separate Chrome browser
 
-> Windows - Open command prompt or run box and enter "start chrome --disable-web-security --disable-gpu --user-data-dir=~/chromeTemp"
-> Linux - Command "google-chrome --disable-web-security"
-> MacOS - Terminal "open -n -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --args --user-data-dir="/tmp/chrome_dev_test" --disable-web-security"
+> Windows - Open command prompt or run box and enter `start chrome --disable-web-security --disable-gpu --user-data-dir=~/chromeTemp`
+
+> Linux - Command `google-chrome --disable-web-security`
+
+> MacOS - Terminal `open -n -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --args --user-data-dir="/tmp/chrome_dev_test" --disable-web-security`
 
 ## Build
 
@@ -38,7 +42,9 @@ To disable the CORS in latest Chrome, you have to start a separate Chrome browse
 
 > Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Some Test RSS feed list
+## Addtional Test RSS feed list
 
 https://www.sbs.com.au/news/feed
+
 https://www.theage.com.au/rss/feed.xml
+
