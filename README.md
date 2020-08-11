@@ -38,7 +38,7 @@ To disable the CORS in latest Chrome, you have to start a separate Chrome browse
 
 > The page will automatically poll the news RSS feeds every three minutes, you can manually click the Poll button on the top-left screen.
 
-![Sample](Sample.jpg)
+![Sample](https://github.com/sethfengli/coding-challenge-news-update-frontend/blob/master/Sample.JPG?raw=true)
 
 ## Build
 
