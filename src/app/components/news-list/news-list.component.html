@@ -1,0 +1,25 @@
+<div class="new-item">
+  <div *ngIf="(news$ | async)?.length > 0; else noNewItems">
+    <div class="card" *ngFor="let news of news$  | async">
+      <div class="card-body">
+        <h5 class="card-title">{{ news.title }}</h5>
+        <p class="card-text">{{ news.description }}</p>
+        <blockquote class="blockquote mb-0">
+          <div class="d-flex w-100">
+            <span class="text-capitalize mr-auto"  [ngClass]="getNewsItemStatusClass(news.status)"> {{ getNewsItemStatusName(news.status) }} </span>
+            <a href="{{news.link}}" class="btn btn-info btn-sm" (click)="$event.stopPropagation()" target="_blank">Link</a>
+          </div>
+          <footer class="blockquote-footer">Last updated at {{ news.lastUpdated.toLocaleDateString() }} {{news.lastUpdated.toLocaleTimeString() }}</footer>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+  <ng-template #noNewItems>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">No news had been loaded yet.</h5>
+      </div>
+    </div>
+  </ng-template>
+</div>
+
