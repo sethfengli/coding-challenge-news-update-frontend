@@ -8,11 +8,14 @@ import { NewsListComponent } from './components/news-list/news-list.component';
 import { v4 as uuidv4 } from 'uuid';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { selectChannelIDAndUrl, AppState } from './store/channel.selectors';
+import { ChannelService } from './services/channel.service';
+import { of } from 'rxjs';
 
 describe('AppComponent', () => {
 
   let store: MockStore;
   let MockSelectChannelIDAndUrl: MemoizedSelector<AppState, IdAndUrl[] >;
+  let mockChannelServic: ChannelService; // jasmine.createSpyObj('ChannelService',
 
   const initialState: Array<Channel> = [{
     id: uuidv4(),
@@ -46,7 +49,11 @@ describe('AppComponent', () => {
         NewsListComponent
       ],
       providers: [
-        provideMockStore({ initialState })
+        provideMockStore({ initialState }),
+        {
+          provide: ChannelService,
+          useValue: jasmine.createSpyObj('ChannelService', {pollNews: of('channel')})
+        }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).overrideComponent(NewsListComponent, {
@@ -55,6 +62,8 @@ describe('AppComponent', () => {
           template: `<h6>App New List</h6>`
         }}).compileComponents();
     store = TestBed.inject(MockStore);
+    mockChannelServic = TestBed.inject(ChannelService);
+//    mockChannelService.pollNews.and.returnValue( of('channel'));
 
     MockSelectChannelIDAndUrl = store.overrideSelector(
       selectChannelIDAndUrl,

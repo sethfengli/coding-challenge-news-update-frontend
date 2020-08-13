@@ -6,6 +6,8 @@ import { Channel, IdAndUrl } from './models/channel.model';
 import { AppState, selectChannelIDAndUrl } from './store/channel.selectors';
 import { AddNewChannel, LoadChannelAsync, DeleteNewsChannel } from './store/channel.actions';
 import { FormGroup, FormControl, Validators, AbstractControl  } from '@angular/forms';
+import { ChannelService } from './services/channel.service';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -47,7 +49,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   get f() { return this.newChannelForm.controls; }
 
-  constructor(private store: Store<AppState>) { }
+  constructor(private store: Store<AppState>,
+              private http: ChannelService) { }
 
   ngOnInit() {
 
@@ -68,19 +71,22 @@ export class AppComponent implements OnInit, OnDestroy {
   addChannel() {
     const url = this.newChannelForm.value.newChannelUrl;
 
-    fetch(url)
-    .then( res => res.text())
-    .then( xml => {
-      if (xml && xml.indexOf('channel') !== -1) {
-        this.store.dispatch(AddNewChannel({url}));
-        this.newChannelForm.reset();
-        this.updateChannelsIdAndUrl = this.getObeservableArray<IdAndUrl>(this.channelIdAndUrl$);
-      } else {
+    this.http.pollNews(url).pipe(
+      catchError( error => {
         alert('URL is invalid.');
-      }
-    }).catch( (err) => {
-        alert('URL is invalid.' + err);
-    });
+        return throwError('URL is failed; please try again later.');
+      })
+      ).subscribe(
+        xml => {
+          if (xml && xml.indexOf('channel') !== -1) {
+            this.store.dispatch(AddNewChannel({url}));
+            this.newChannelForm.reset();
+            this.updateChannelsIdAndUrl = this.getObeservableArray<IdAndUrl>(this.channelIdAndUrl$);
+          } else {
+            alert('URL is invalid.');
+          }
+        }
+      );
   }
 
   delChannel(id: string) {
